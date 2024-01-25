@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from "axios";
-import { GameQuery } from "../App";
+import { GameQuery } from "../components/gameQueryStore";
 
 export interface FetchResponse<T> {
   count: number;
@@ -20,7 +20,8 @@ interface ParamsGame {
     parent_platforms: GameQuery;
     ordering: GameQuery;
     search: GameQuery;
-  };}
+  };
+}
 
 class APIClient<T> {
   endpoint: string;
@@ -30,9 +31,10 @@ class APIClient<T> {
   }
 
   getAll = (config: AxiosRequestConfig) => {
-    return axiousInstance.get<FetchResponse<T>>(this.endpoint, config).then((res) => res.data);
+    return axiousInstance
+      .get<FetchResponse<T>>(this.endpoint, config)
+      .then((res) => res.data);
   };
-
 }
 
 export default APIClient;
